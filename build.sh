@@ -16,8 +16,17 @@ mkdir -p "${MACOS_DIR}"
 echo "==> Compiling Swift sources (universal binary)"
 swiftc -O \
     -target arm64-apple-macos13.0 \
-    -o "${MACOS_DIR}/${APP_NAME}" \
+    -o "${MACOS_DIR}/${APP_NAME}.arm64" \
     Sources/*.swift
+swiftc -O \
+    -target x86_64-apple-macos13.0 \
+    -o "${MACOS_DIR}/${APP_NAME}.x86_64" \
+    Sources/*.swift
+lipo -create \
+    "${MACOS_DIR}/${APP_NAME}.arm64" \
+    "${MACOS_DIR}/${APP_NAME}.x86_64" \
+    -output "${MACOS_DIR}/${APP_NAME}"
+rm "${MACOS_DIR}/${APP_NAME}.arm64" "${MACOS_DIR}/${APP_NAME}.x86_64"
 
 echo "==> Writing Info.plist"
 cat > "${CONTENTS}/Info.plist" <<'PLIST'
