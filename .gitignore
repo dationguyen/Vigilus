@@ -1,0 +1,15 @@
+# macOS
+.DS_Store
+
+# Build artifacts
+build/
+
+# Xcode / SwiftPM (in case they get used later)
+.build/
+DerivedData/
+*.xcodeproj/xcuserdata/
+*.xcworkspace/xcuserdata/
+
+# Claude Code local settings
+settings.local.json
+.claude/worktrees/
