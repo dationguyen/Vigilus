@@ -1,0 +1,30 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  release:
+    name: Build and release
+    runs-on: macos-latest
+    permissions:
+      contents: write # required to create the GitHub Release
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build Vigilus.app
+        run: ./build.sh
+
+      - name: Zip app bundle
+        run: |
+          cd build
+          ditto -c -k --sequesterRsrc --keepParent Vigilus.app "../Vigilus-${{ github.ref_name }}.zip"
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: Vigilus-${{ github.ref_name }}.zip
+          generate_release_notes: true

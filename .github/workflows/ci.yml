@@ -1,0 +1,24 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    name: Build app
+    runs-on: macos-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Show Swift version
+        run: swift --version
+
+      - name: Build Vigilus.app
+        run: ./build.sh
+
+      - name: Verify bundle was produced
+        run: test -x build/Vigilus.app/Contents/MacOS/Vigilus
