@@ -33,6 +33,23 @@ both in the menu bar with sane defaults and remembers your state across launches
 
 ## Install
 
+### Download (recommended)
+
+Grab the latest `Vigilus-*.zip` from the
+[**Releases**](https://github.com/dationguyen/Vigilus/releases/latest) page. It's
+a universal build that runs natively on both Apple Silicon and Intel Macs
+(macOS 13+).
+
+1. Unzip it — you'll get `Vigilus.app`.
+2. Drag `Vigilus.app` into your `/Applications` folder.
+3. Launch it. Because the app is ad-hoc signed (not notarized), the first launch
+   may be blocked by Gatekeeper — **right-click → Open**, then confirm, or allow
+   it under **System Settings → Privacy & Security**.
+
+Vigilus runs as a menu bar accessory (`LSUIElement`) — no Dock icon.
+
+### Build from source
+
 Requires **macOS 13+** and the **Swift toolchain** (Xcode or Command Line Tools —
 verify with `swift --version`).
 
@@ -49,8 +66,6 @@ This compiles `Sources/*.swift` into a universal binary, assembles
 open build/Vigilus.app          # run it
 cp -r build/Vigilus.app /Applications/   # install it
 ```
-
-Vigilus runs as a menu bar accessory (`LSUIElement`) — no Dock icon.
 
 ## Usage
 
